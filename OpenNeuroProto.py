@@ -63,8 +63,50 @@ class OpenNeuroOverview(object):
             return True
         else:
             return False
+    
+    def display_description(self, accession_number):
+        """
+        read the dataset_description.json file
+        :param accession_number: the dataset id
+        :return: dataframe
+        """
+        if not self.check_dataset(accession_number):
+            print("dataset cannot be found")
+            return False
+        else:
+            path_to_file = accession_number + '/dataset_description.json'
+            s3 = boto3.resource("s3", config=Config(signature_version=UNSIGNED))
+            data_description = s3.Object('openneuro.org', path_to_file).get()['Body']
+            df = pd.read_json(data_description, orient='index')
+            pd.set_option('display.max_rows', None)
+            pd.set_option('display.max_columns', None)
+            pd.set_option('display.width', None)
+            pd.set_option('display.max_colwidth', -1)
+            print(df)
+            return df
 
+    def display_readme(self, accession_number):
+        """
 
+        :param accession_number: dataset id
+        :return: everything in readme
+        """
+        if not self.check_dataset(accession_number):
+            print("dataset cannot be found")
+            return False
+        else:
+            try:
+                path_to_file = accession_number + '/README'
+                s3 = boto3.resource("s3", config=Config(signature_version=UNSIGNED))
+                readme = s3.Object('openneuro.org', path_to_file).get()['Body'].read()
+                readme_print = str(readme, 'utf-8')
+                print(readme_print)
+                return readme_print
+            except:
+                print("readme file does not exist.")
+                return False
+
+            
 class OpenNeuroDownload(object):
     def __init__(self,accession_number):
         self.accession_number = accession_number
@@ -128,9 +170,6 @@ class OpenNeuroDownload(object):
 
     def reformat(self):
         pass
-
-#overview = OpenNeuroOverview()
-#print(len(overview.read_subject("ds003030")))
 
 
 
