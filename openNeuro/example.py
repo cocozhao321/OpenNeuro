@@ -15,8 +15,6 @@ def main():
 
     # download a subject's data only and reformat it as BIDS-I
     download_dataset = overview.get_dataset("ds003030", False, "04")  # get dataset based on accession number and id
-
-    #download_dataset = ('../ds003030_sub02', '../ds003030_sub02/open_neuro.toml', 'sub')
     print(download_dataset)
     output = OutputUpdate(download_dataset)
     output.webCommunication() #  communicate with web-platform and update conf file
