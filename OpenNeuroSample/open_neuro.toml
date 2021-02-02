@@ -1,0 +1,11 @@
+# Config file for sample.py project
+title = 'Sample Project'
+sessionId = "" #may be an array
+subjectName = "sub-" #may be an array
+datestr = "20190219"
+subjectNum = 0 #may be an array
+subjectDay = 1 #may be an array
+sessionNum = "" #may be an array
+runNum = 1
+imageType = "func"
+suffix = ""
