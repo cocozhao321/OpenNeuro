@@ -6,3 +6,5 @@ The OpenNeuro folder should put under the brainiak/rtcloud:spolcyn:bidsinc-dev i
 - initialize.py: use the downloaded dataset and convert to BIDS-I
 - example.py: a simple example of downloading an OpenNeuro dataset and convert it to BIDS-I
 - openneuro.toml: a toml file that used to read some required info for BIDS-I and save user's preference. 
+## bidsStreamer
+- A simple data streamer that can stream bidsArchive, openNeuro dataset, dicom, or dicom directory in bidsIncremental format. 
